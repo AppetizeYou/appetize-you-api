@@ -1,5 +1,6 @@
 FactoryBot.define do
-  factory :theme_category do
+  factory :unit do
     name { "MyString" }
+    abbreviation { "MyString" }
   end
 end
