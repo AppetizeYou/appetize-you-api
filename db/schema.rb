@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_12_093855) do
+ActiveRecord::Schema.define(version: 2022_07_12_105456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 2022_07_12_093855) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "title"
+    t.text "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "sender_id", null: false
+    t.bigint "recipient_id", null: false
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "occasion_categories", force: :cascade do |t|
@@ -46,4 +57,14 @@ ActiveRecord::Schema.define(version: 2022_07_12_093855) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "users", column: "sender_id"
 end
