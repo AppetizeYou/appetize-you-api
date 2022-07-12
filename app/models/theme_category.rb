@@ -1,0 +1,2 @@
+class ThemeCategory < ApplicationRecord
+end
