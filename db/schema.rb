@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_12_105456) do
+ActiveRecord::Schema.define(version: 2022_07_16_061450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 2022_07_12_105456) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "sender_id", null: false
     t.bigint "recipient_id", null: false
+    t.bigint "previous_message_id"
+    t.index ["previous_message_id"], name: "index_messages_on_previous_message_id"
     t.index ["recipient_id"], name: "index_messages_on_recipient_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
@@ -65,6 +67,7 @@ ActiveRecord::Schema.define(version: 2022_07_12_105456) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "messages", "messages", column: "previous_message_id"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
 end
