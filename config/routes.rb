@@ -7,4 +7,10 @@ Rails.application.routes.draw do
     patch "/", to: "users#update"
     delete "/", to: "users#destroy"
   end
+
+  scope "/messages" do
+    get "/", to: "messages#index"
+    post "/", to: "messages#create"
+    get "/:id", to: "messages#show"
+  end
 end
