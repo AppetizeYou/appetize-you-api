@@ -1,0 +1,2 @@
+class MainIngredientCategory < ApplicationRecord
+end
