@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_18_125045) do
+ActiveRecord::Schema.define(version: 2022_07_18_141641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2022_07_18_125045) do
   create_table "recipes", force: :cascade do |t|
     t.string "title", null: false
     t.integer "serve", null: false
-    t.text "description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "author_id", null: false
@@ -57,6 +56,8 @@ ActiveRecord::Schema.define(version: 2022_07_18_125045) do
     t.bigint "occasion_category_id", null: false
     t.bigint "main_ingredient_category_id", null: false
     t.bigint "cooking_method_category_id", null: false
+    t.text "cooking_order", default: [], array: true
+    t.string "ingredient", default: [], array: true
     t.index ["author_id"], name: "index_recipes_on_author_id"
     t.index ["cooking_method_category_id"], name: "index_recipes_on_cooking_method_category_id"
     t.index ["main_ingredient_category_id"], name: "index_recipes_on_main_ingredient_category_id"
