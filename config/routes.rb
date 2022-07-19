@@ -13,4 +13,13 @@ Rails.application.routes.draw do
     post "/", to: "messages#create"
     get "/:id", to: "messages#show"
   end
+
+  scope "/recipes" do
+    get "/", to: "recipes#index"
+    post "/", to: "recipes#create"
+    get "/:id", to: "recipes#show"
+    put "/:id", to: "recipes#update"
+    patch "/:id", to: "recipes#update"
+    delete "/:id", to: "recipes#destroy"
+  end
 end

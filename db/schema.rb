@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_16_061450) do
+ActiveRecord::Schema.define(version: 2022_07_18_141641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,25 @@ ActiveRecord::Schema.define(version: 2022_07_16_061450) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "recipes", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "serve", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "author_id", null: false
+    t.bigint "type_category_id", null: false
+    t.bigint "occasion_category_id", null: false
+    t.bigint "main_ingredient_category_id", null: false
+    t.bigint "cooking_method_category_id", null: false
+    t.text "cooking_order", default: [], array: true
+    t.string "ingredient", default: [], array: true
+    t.index ["author_id"], name: "index_recipes_on_author_id"
+    t.index ["cooking_method_category_id"], name: "index_recipes_on_cooking_method_category_id"
+    t.index ["main_ingredient_category_id"], name: "index_recipes_on_main_ingredient_category_id"
+    t.index ["occasion_category_id"], name: "index_recipes_on_occasion_category_id"
+    t.index ["type_category_id"], name: "index_recipes_on_type_category_id"
+  end
+
   create_table "type_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -70,4 +89,9 @@ ActiveRecord::Schema.define(version: 2022_07_16_061450) do
   add_foreign_key "messages", "messages", column: "previous_message_id"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "recipes", "cooking_method_categories"
+  add_foreign_key "recipes", "main_ingredient_categories"
+  add_foreign_key "recipes", "occasion_categories"
+  add_foreign_key "recipes", "type_categories"
+  add_foreign_key "recipes", "users", column: "author_id"
 end

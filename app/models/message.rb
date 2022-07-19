@@ -10,6 +10,10 @@ class Message < ApplicationRecord
     )
   end
 
+  def check_ownership(user)
+    return self.sender == user || self.recipient == user
+  end
+
   def self.find_by_sender(user)
     return self.where(sender: user)
   end
