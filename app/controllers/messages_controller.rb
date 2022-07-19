@@ -3,8 +3,6 @@ class MessagesController < ApplicationController
   before_action :set_message, only: %i[show]
 
   def index
-    puts current_user
-
     @messages = []
     Message.find_by_sender(current_user).order("created_at ASC").each { |message| @messages << message.beautify_message }
 
@@ -35,7 +33,9 @@ class MessagesController < ApplicationController
   end
 
   def set_message
-    @message = Message.find_by_id(params[:id])
-    @message = nil if !(@message.sender == current_user || @message.recipient == current_user)
+    message = Message.find_by_id(params[:id])
+    if message.check_ownership(current_user)
+        @message = message
+    end
   end
 end
