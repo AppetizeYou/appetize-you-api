@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, except: %i[create sign_in]
+  before_action :authenticate_user, except: %i[create login]
 
   def create
     @user = User.create(user_params)
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def sign_in
+  def login
     @user = User.find_by_email(params[:email])
     if @user && @user.authenticate(params[:password])
       auth_token = Knock::AuthToken.new payload: { sub: @user.id }
