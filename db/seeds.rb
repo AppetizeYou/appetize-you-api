@@ -12,10 +12,10 @@ type_categories.each { |category| TypeCategory.create(name: category) } if TypeC
 occasion_categories = ["daily", "fast", "weight loss", "bento", "healthy", "food styling", "special event", "baby food", "etc"]
 occasion_categories.each { |category| OccasionCategory.create(name: category) } if OccasionCategory.count == 0
 
-main_ingredient_categories = ["beef", "pork", "poultry", "red meat", "vegetable", "seafood", "egg", "dairy", "rice", "flour", "mushroom", "fruit", "nut", "lentil", "grain"]
+main_ingredient_categories = ["beef", "pork", "poultry", "red meat", "vegetable", "seafood", "egg", "dairy", "rice", "flour", "mushroom", "fruit", "nut", "lentil", "grain", "etc"]
 main_ingredient_categories.each { |category| MainIngredientCategory.create(name: category) } if MainIngredientCategory.count == 0
 
-cooking_method_categories = ["boiling", "shallow frying", "stir frying", "deep frying", "grilling", "roasting", "broiling", "searing", "baking", "sauteing"]
+cooking_method_categories = ["boiling", "shallow frying", "stir frying", "deep frying", "grilling", "roasting", "broiling", "searing", "baking", "sauteing", "etc"]
 cooking_method_categories.each { |category| CookingMethodCategory.create(name: category) } if CookingMethodCategory.count == 0
 
 units = [
@@ -25,6 +25,7 @@ units = [
   { name: "litre", abbreviation: "l" },
   { name: "millimetre", abbreviation: "mm" },
   { name: "centimetre", abbreviation: "cm" },
-  { name: "metre", abbreviation: "m" }
+  { name: "metre", abbreviation: "m" },
+  { name: "each", abbreviation: "ea" }
 ]
 units.each { |unit| Unit.create(name: unit[:name], abbreviation: unit[:abbreviation]) } if Unit.count == 0
