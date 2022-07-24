@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     get "/main_ingredient_categories", to: "main_ingredient_categories#show"
     get "/cooking_method_categories", to: "cooking_method_categories#show"
 
+    get "/ingredient_units", to: "ingredient_units#show"
+
     get "/", to: "recipes#index"
     post "/", to: "recipes#create"
     get "/:id", to: "recipes#show"
