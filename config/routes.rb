@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   end
 
   scope "/recipes" do
-    get "/categories", to: "categories#show"
+    get "/type_categories", to: "type_categories#show"
+    get "/occasion_categories", to: "occasion_categories#show"
+    get "/main_ingredient_categories", to: "main_ingredient_categories#show"
+    get "/cooking_method_categories", to: "cooking_method_categories#show"
 
     get "/", to: "recipes#index"
     post "/", to: "recipes#create"
