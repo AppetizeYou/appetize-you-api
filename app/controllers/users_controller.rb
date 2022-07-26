@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
       render json: { username: @user.username, jwt: auth_token.token }, status: 200
     else
-      render json: { error: "Either the account does not exist or invalid email or password input(s) made!" }
+      render json: { error: "Either the account does not exist or invalid email or password input(s) made!" }, status: 401
     end
   end
 

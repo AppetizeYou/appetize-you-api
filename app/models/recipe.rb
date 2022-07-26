@@ -25,7 +25,7 @@ class Recipe < ApplicationRecord
 
   def self.format_ingredient(ingredients)
     formatted_ingredient = []
-    ingredients.each { |ingredient| formatted_ingredient << ingredient.split(", ") }
+    ingredients.each { |ingredient| formatted_ingredient << ingredient.split(",") }
 
     return formatted_ingredient
   end
