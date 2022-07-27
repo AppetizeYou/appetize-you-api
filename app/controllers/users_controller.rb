@@ -23,10 +23,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    render json: current_user
+  end
+
   def update
     current_user.update(user_params)
     if current_user.save
-      render json: { text: "The account has been successfully updated!" }
+        auth_token = Knock::AuthToken.new payload: { sub: current_user.id }
+
+        render json: { username: current_user.username, jwt: auth_token.token }, status: 200
     else
       render json: { text: "Failed to update account!" }
     end

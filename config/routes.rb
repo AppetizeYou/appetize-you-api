@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope "/auth" do
     post "/signup", to: "users#create"
     post "/login", to: "users#login"
+    get "/", to: "users#show"
     put "/", to: "users#update"
     patch "/", to: "users#update"
     delete "/", to: "users#destroy"

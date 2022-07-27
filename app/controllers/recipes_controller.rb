@@ -43,7 +43,7 @@ class RecipesController < ApplicationController
   def recipe_params
     params
       .require(:recipe)
-      .permit(:title, :serve, :type_category_id, :occasion_category_id, :main_ingredient_category_id, :cooking_method_category_id, ingredient: [], cooking_order: [])
+      .permit(:title, :serve, :type_category_id, :occasion_category_id, :main_ingredient_category_id, :cooking_method_category_id, ingredients: [], steps: [])
       .merge(author: current_user)
   end
 
