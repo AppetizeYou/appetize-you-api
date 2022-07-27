@@ -41,9 +41,13 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
+    puts "============================================================================="
+    puts params[:image]
+    puts "============================================================================="
+
     params
       .require(:recipe)
-      .permit(:title, :serve, :type_category_id, :occasion_category_id, :main_ingredient_category_id, :cooking_method_category_id, ingredients: [], steps: [])
+      .permit(:title, :serve, :type_category_id, :occasion_category_id, :main_ingredient_category_id, :cooking_method_category_id, :image, :ingredients => [], :steps => [])
       .merge(author: current_user)
   end
 
