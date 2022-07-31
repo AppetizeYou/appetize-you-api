@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_27_074031) do
+ActiveRecord::Schema.define(version: 2022_07_31_141252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,17 @@ ActiveRecord::Schema.define(version: 2022_07_27_074031) do
     t.index ["type_category_id"], name: "index_recipes_on_type_category_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "reviewable_type", null: false
+    t.bigint "reviewable_id", null: false
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "reviewer_id", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
+  end
+
   create_table "type_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -124,4 +135,5 @@ ActiveRecord::Schema.define(version: 2022_07_27_074031) do
   add_foreign_key "recipes", "occasion_categories"
   add_foreign_key "recipes", "type_categories"
   add_foreign_key "recipes", "users", column: "author_id"
+  add_foreign_key "reviews", "users", column: "reviewer_id"
 end
