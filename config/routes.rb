@@ -29,5 +29,8 @@ Rails.application.routes.draw do
         put "/:id", to: "recipes#update"
         patch "/:id", to: "recipes#update"
         delete "/:id", to: "recipes#destroy"
+
+        get "/:id/reviews", to: "reviews#index"
+        post "/:id/review", to: "reviews#create"
     end
 end
