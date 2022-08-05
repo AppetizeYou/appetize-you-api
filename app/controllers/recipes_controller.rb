@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
     before_action :authenticate_user, except: %i[index show]
-    before_action :set_recipe, except: %i[index create]
+    before_action :set_recipe, except: %i[index create my_post]
 
     def index
         @recipes = []
@@ -24,6 +24,12 @@ class RecipesController < ApplicationController
         else
             render json: { error: "Recipe not found!" }, status: :not_found
         end
+    end
+
+    def my_post
+        @recipes = Recipe.where(author: current_user)
+        
+        render json: @recipes
     end
 
     def update
