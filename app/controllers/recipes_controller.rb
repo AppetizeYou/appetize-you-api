@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
     before_action :authenticate_user, except: %i[index show]
-    before_action :set_recipe, except: %i[index create my_post]
+    before_action :set_recipe, except: %i[index create show_weekly show_monthly my_post]
 
     def index
         @recipes = []
@@ -23,6 +23,26 @@ class RecipesController < ApplicationController
             render json: RecipeSerializer.new(@recipe).serializable_hash[:data][:attributes]
         else
             render json: { error: "Recipe not found!" }, status: :not_found
+        end
+    end
+
+    def show_weekly
+        weekly_recipes = Recipe.where("created_at >= ? and created_at <= ?", Date.today.beginning_of_week, Date.today.end_of_week)
+        if weekly_recipes
+            @recipes = []
+            weekly_recipes.each { |recipe| @recipes << RecipeSerializer.new(recipe).serializable_hash[:data][:attributes] }
+
+            render json: @recipes
+        end
+    end
+
+    def show_monthly
+        monthly_recipes = Recipe.where("created_at >= ? and created_at <= ?", Date.today.beginning_of_month, Date.today.end_of_month)
+        if monthly_recipes
+            @recipes = []
+            monthly_recipes.each { |recipe| @recipes << RecipeSerializer.new(recipe).serializable_hash[:data][:attributes] }
+
+            render json: @recipes
         end
     end
 

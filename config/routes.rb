@@ -27,6 +27,10 @@ Rails.application.routes.draw do
 
         get "/", to: "recipes#index"
         post "/", to: "recipes#create"
+        
+        get "/weekly", to: "recipes#show_weekly"
+        get "/monthly", to: "recipes#show_monthly"
+
         get "/:id", to: "recipes#show"
         put "/:id", to: "recipes#update"
         patch "/:id", to: "recipes#update"
@@ -34,6 +38,7 @@ Rails.application.routes.draw do
 
         get "/:id/reviews", to: "reviews#index"
         post "/:id/review", to: "reviews#create"
+
     end
 
     resources :contacts, only: [:new, :create]
