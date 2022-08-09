@@ -35,4 +35,6 @@ Rails.application.routes.draw do
         get "/:id/reviews", to: "reviews#index"
         post "/:id/review", to: "reviews#create"
     end
+
+    resources :contacts, only: [:new, :create]
 end

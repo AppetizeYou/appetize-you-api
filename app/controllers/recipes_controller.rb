@@ -27,8 +27,9 @@ class RecipesController < ApplicationController
     end
 
     def my_post
-        @recipes = Recipe.where(author: current_user)
-        
+        @recipes = []
+        Recipe.where(author: current_user).order("created_at DESC").each { |recipe| @recipes << RecipeSerializer.new(recipe).serializable_hash[:data][:attributes] }
+
         render json: @recipes
     end
 

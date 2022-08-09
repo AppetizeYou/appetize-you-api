@@ -49,3 +49,7 @@ gem 'net-imap', require: false
 gem 'net-pop', require: false
 
 gem "jsonapi-serializer", "~> 2.2"
+
+gem "mail_form", "~> 1.9"
+
+gem "mailcatcher", "~> 0.2.4"
