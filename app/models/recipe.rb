@@ -10,6 +10,11 @@ class Recipe < ApplicationRecord
 
     has_many :reviews, as: :reviewable
 
+    validates :title, presence: true
+    validates :serve, presence: true
+    validates :ingredients, presence: true
+    validates :steps, presence: true
+
     def image_url
         Rails.application.routes.url_helpers.url_for(image) if image.attached?
     end
