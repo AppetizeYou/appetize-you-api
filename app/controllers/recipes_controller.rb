@@ -1,12 +1,12 @@
 class RecipesController < ApplicationController
-    before_action :authenticate_user, except: %i[index show]
+    before_action :authenticate_user, except: %i[index show show_weekly show_monthly]
     before_action :set_recipe, except: %i[index create show_weekly show_monthly my_post]
 
     def index
         @recipes = []
         Recipe.all.order("created_at DESC").each { |recipe| @recipes << RecipeSerializer.new(recipe).serializable_hash[:data][:attributes] }
 
-        render json: @recipes
+        render json: @recipes, status: 200
     end
 
     def create
@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
 
     def show
         if @recipe
-            render json: RecipeSerializer.new(@recipe).serializable_hash[:data][:attributes]
+            render json: RecipeSerializer.new(@recipe).serializable_hash[:data][:attributes], status: 200
         else
             render json: { error: "Recipe not found!" }, status: :not_found
         end
@@ -55,7 +55,7 @@ class RecipesController < ApplicationController
 
     def update
         if @recipe.update(recipe_params)
-            render json: RecipeSerializer.new(@recipe).serializable_hash[:data][:attributes]
+            render json: RecipeSerializer.new(@recipe).serializable_hash[:data][:attributes], status: 200
         else
             render json: @recipe.errors, status: :unprocessable_entity
         end
