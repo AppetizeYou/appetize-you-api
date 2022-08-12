@@ -4,12 +4,9 @@ class ContactsController < ApplicationController
     end
 
     def create
+        # create new contact details and submit
         @contact = Contact.new(params[:contact])
         @contact.request = request
-
-        puts "=========================================="
-        puts @contact
-        puts "=========================================="
 
         if @contact.deliver
             # render json: @contact

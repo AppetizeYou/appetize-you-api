@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_action :authenticate_user, except: %i[create login]
 
+    # create new user and return the username and jwt token
     def create
         @user = User.create(user_params)
         if @user.errors.any?
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
         end
     end
 
+    # login user and return the username and jwt token
     def login
         @user = User.find_by_email(params[:email])
         if @user && @user.authenticate(params[:password])
@@ -23,10 +25,12 @@ class UsersController < ApplicationController
         end
     end
 
+    # return current user details
     def show
         render json: current_user
     end
 
+    # update current user details and return newly generated username (if changed) and jwt
     def update
         current_user.update(user_params)
         if current_user.save
@@ -38,6 +42,7 @@ class UsersController < ApplicationController
         end
     end
 
+    # delete user
     def destroy
         current_user.destroy
 
@@ -46,6 +51,7 @@ class UsersController < ApplicationController
 
     private
 
+    # permit passed params
     def user_params
         params.permit(:username, :email, :password, :password_confirmation)
     end

@@ -15,6 +15,8 @@ class Recipe < ApplicationRecord
     validates :ingredients, presence: true
     validates :steps, presence: true
 
+    # generate image url for stored image
+    # this will refer to base url of each development and production environment
     def image_url
         Rails.application.routes.url_helpers.url_for(image) if image.attached?
     end
